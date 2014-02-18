@@ -5,23 +5,23 @@ puts "                             Begin OMNILOADER                            "
 puts "-------------------------------------------------------------------------"
 
 Dir.chdir
-Dir.chdir("omniloader_setup")
+Dir.chdir(".omniloader_setup")
 
-print "Copying backup .vimrc..."
+puts "Copying backup .vimrc..."
 vimrc_copy = File.read("vimrc_copy")
-print "done"
+puts "done"
 puts
 
-print "Copying backup .bashrc..."
+puts "Copying backup .bashrc..."
 bashrc_copy = File.read("bashrc_copy")
-print "done"
-puts 
+puts "done"
+puts
 
 Dir.chdir
-print "Deleting .vim directrory..."
+puts "Deleting .vim directrory..."
 vim_dir = system("rm -rf .vim")
 puts vim_dir ? "done" : "failed"
-puts 
+puts
 
 puts "Reverting to old .vimrc..."
 File.open("vimrc", "w") do |f|
@@ -38,10 +38,13 @@ end
 puts "done"
 puts
 
-print "Removing setupd directory..."
-remove = system("rm -rf omniloader_setup")
+puts "Removing setup directory..."
+remove = system("rm -rf .omniloader_setup")
 puts remove ? "done" : "failed"
 puts
+
+Dir.chdir
+`mv .vim_copy .vim`
 
 puts "-------------------------------------------------------------------------"
 puts "                              End OMNILOADER                             "
